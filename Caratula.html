@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es-mx">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Baja de Alumnos</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+        <?!= include('CSS') ?> <!-- *** EL INCLUDE ES UNA FUNCION QUE SE DEBE INCLUIR -->
+    </head>
+
+    <body>
+        <div class="encabeza">
+            <h1 class="titulo">Baja de Alumnos</h1>
+        </div>
+
+        <div class="msg"></div>
+            <table>
+                <thead id="hproceso"></thead>
+            </table>
+        </div>
+
+        <p style="color: dodgerblue; size: 8px; margin-left: 50px; margin-right: 50px;">Ingresa algún texto para la busqueda del alumno</p>
+        
+        <form id="formManto" onsubmit="actualiza(this)"><!-- Nombre del Formulario-->
+            <div class="formulario">
+                <div class="nombreAlumno">
+                    <label for="alumnosDataList" class="form-label">Alumno</label>
+                    <br>
+                <!--</div>
+                <div class="nombreAlumnoDL"><!--Lista desplegable de alumnos-->
+                    <input class="form-control" 
+                    id="alumnosDataList" 
+                    list="datalistOptions" 
+                    placeholder="Escribe para inciar busqueda..." 
+                    size="40" required>
+                    <datalist id="datalistOptions"></datalist>
+                </div>
+
+                <div class="statusNuevo">
+                    <label for="staNvo" class="form-label">Status Nuevo</label>
+                    <br>
+                    <select class="form-select" aria-label="staNvo" name="staNvo" id="staNvo" size="1" onchange="statusNuevo()">
+                        <option value=""></option>
+                        <option value="BAJA ADMINISTRATIVA">Baja Admva</option>
+                        <option value="BAJA TEMPORAL">Baja Temp</option>
+                        <option value="BAJA DEFINITIVA">Baja Def</option>
+                    </select>
+                </div>
+
+                <div class="solicita">
+                    <label for="solicita">Solicitante</label>
+                    <br>
+                    <select class="form-select" aria-label="solicita" name="solicita" id="solicita" onchange="cargaSolicitante()">
+                        <option value=""></option>
+                        <option value="Natalia Alanis">Natalia Alanis</option>
+                        <option value="Vene Villarreal">Vene Villarreal</option>
+                        <option value="Narciso Gómez">Narciso Gómez</option>
+                        <option value="Krishna Argumedo">Krishna Argumedo</option>
+                        <option value="Ana Aguilera">Ana Aguilera</option>
+                        <option value="Gabriela Hernández">Gabriela Hernández</option>
+                        <option value="Norma Estrella">Norma Estrella</option>
+                    </select>
+                </div>
+
+                <div class="motivo">
+                    <label for="motivo">Motivo</label>
+                    <br>
+                    <input type="text" class="form-control" id="motivo" onchange="cargaMotivo()">
+                </div>
+
+            </div>
+            <button class="boton" type="submit">Actualiza</button>
+        </form>
+<!--  TABLA DE RESULTADOS -->
+        <table>
+            <thead id="headerAlu"></thead>
+            <tbody id="datosAlu"></tbody>
+        </table>
+        <table >
+            <thead id="headerTab">
+              
+            </thead>
+            <tbody id="tablaRes">
+                
+            </tbody>
+        </table>
+        <table>
+            <thead id="headerTabLis"></thead>
+            <tbody id="tablaResLis"></tbody>
+        </table>
+        <?!=include('JS') ?><!-- Aqui se incluyen los datos del script lado del cliente-->
+        
+    </body>
+   
+</html>

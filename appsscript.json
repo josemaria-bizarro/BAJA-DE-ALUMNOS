@@ -1,0 +1,46 @@
+{
+  "timeZone": "America/Mexico_City",
+  "dependencies": {
+    "enabledAdvancedServices": [
+      {
+        "userSymbol": "Drive",
+        "serviceId": "drive",
+        "version": "v2"
+      },
+      {
+        "userSymbol": "DriveActivity",
+        "serviceId": "driveactivity",
+        "version": "v2"
+      },
+      {
+        "userSymbol": "AdminDirectory",
+        "version": "directory_v1",
+        "serviceId": "admin"
+      },
+      {
+        "userSymbol": "Classroom",
+        "version": "v1",
+        "serviceId": "classroom"
+      }
+    ]
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "oauthScopes":[
+    "https://www.googleapis.com/auth/classroom.courses",
+    "https://www.googleapis.com/auth/classroom.rosters",
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/admin.directory.user",
+    "https://www.googleapis.com/auth/gmail.send",
+    "https://www.googleapis.com/auth/gmail.compose",
+    "https://www.googleapis.com/auth/gmail.modify",
+    "https://mail.google.com/",
+    "https://www.googleapis.com/auth/gmail.addons.current.action.compose",
+    "https://www.googleapis.com/auth/drive.readonly",
+    "https://www.googleapis.com/auth/drive"
+  ],
+  "runtimeVersion": "V8",
+  "webapp": {
+    "executeAs": "USER_DEPLOYING",
+    "access": "MYSELF"
+  }
+}

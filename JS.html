@@ -1,0 +1,177 @@
+<script>
+    window.addEventListener('load',cargaDatalists);
+    let inputStatus="";
+    let inputSolicita="";
+    let inputMotivo="";
+    let werror=0;
+    let arrayBajaAula=[];
+    
+
+    function cargaDatalists()
+    {
+        google.script.run
+        .withSuccessHandler(cargaAlumnos)
+        .withFailureHandler(proc=>{console.log("error al cargar datalist")})
+        .DataAlumnos()
+    }
+
+    function cargaAlumnos(dataAlumnos)
+    {
+        const inputAlumnos=document.getElementById("datalistOptions");
+        dataAlumnos.sort();
+        dataAlumnos.forEach(alumno => {
+            const ilara=document.createElement('option');
+            ilara.value=alumno[0];            
+            inputAlumnos.appendChild(ilara);
+        });
+    }
+
+    function statusNuevo()
+    {
+         inputStatus=document.getElementById("staNvo");
+        
+    }
+
+    function cargaSolicitante()
+    {
+        inputSolicita=document.getElementById("solicita")
+    }
+
+    function cargaMotivo()
+    {
+        inputMotivo=document.getElementById("motivo")
+
+    }
+
+    function actualiza()
+    {
+        //REALIZA EL CAMBIO DE STATUS EN CATALOGO ALUMNOS
+        event.preventDefault();
+        var msg=document.getElementById('hproceso');
+
+        msg.innerHTML="Procesando";
+        var alumnoSelec=document.getElementById('alumnosDataList').value;
+    
+    google.script.run
+    .withSuccessHandler(statusCambiado)
+    .withFailureHandler(proc=>{console.log("error al obtener datos de alumno")})
+    .cambiaStatusAlumno(alumnoSelec,inputStatus.value,inputSolicita.value,inputMotivo.value);
+        
+        //ELIMINA DE LAS AULAS
+        //ELIMINA DE LISTAS
+        //MUESTRA LO REALIZADO
+        
+    }
+
+    
+
+    function statusCambiado(statusAlumno)
+    {
+        if (statusAlumno[0]==0)
+        {
+            //DESCARGA A VARIABLES LOS DATOS NECESARIOS PARA DAR DE BAJA EN AULAS Y LISTAS
+            google.script.run
+            .withSuccessHandler(muestraTabla)
+            .withFailureHandler(proc=>{alert("   \n     ERROR EN EL PROCESO \n **** ERROR AL ELIMINAR AULAS *****")})
+            .eliminaAulas(statusAlumno[2],statusAlumno[3]);
+            
+        }
+        else
+        {
+            mensajeFinal(statusAlumno[0])
+        }
+    
+    }
+
+    function muestraTabla(arrayBaja)
+    {
+        var headerTabla="  <tr><th>Nombre Aula</th></tr>"
+        var headerAlumno="<tr><th>Alumno</th><th>Estatus</th></tr>"
+        var contenidoAlumno="<tr><td>"+arrayBaja[0][0]+"</td><td>"+arrayBaja[0][5]+"</td>"
+
+        //MUESTRA TODAS LAS AULAS Y LISTAS AFECTADAS  FOR.EACH
+         var contenidoTabla=[];
+         var index=1;
+         
+         arrayBaja.forEach(ilara=>{
+            if (index<arrayBaja.length)
+            {
+                contenidoTabla.push(["<tr><td>"+ilara[3]+"</td></tr>"])
+            }
+            index++    
+        })       
+        var headAlu=document.getElementById('headerAlu')
+        var contAlu=document.getElementById('datosAlu')
+        var headTab=document.getElementById('headerTab');
+        var contab=document.getElementById('tablaRes');
+
+        headAlu.innerHTML="";
+        contAlu.innerHTML="";
+        headTab.innerHTML="";
+        contab.innerHTML="";
+        
+        headAlu.innerHTML=headerAlumno;
+        contAlu.innerHTML=contenidoAlumno;
+        headTab.innerHTML=headerTabla;
+        contab.innerHTML=contenidoTabla;
+        
+         //obtiene listas para mostrar y retira alumno
+         google.script.run
+        //.withSuccessHandler(muestraListas)
+        .withSuccessHandler(muestraListas)
+        .withFailureHandler(proc=>{alert("   \n     ERROR EN EL PROCESO \n **** ERROR AL ELIMINAR LISTAS *****")})
+        .eliminaListas(arrayBaja);
+        
+        
+    }
+
+    function muestraListas(arrayLista)
+    {
+        var headerTabla="  <tr><th>Nombre de la Lista</th></tr>"
+
+
+        //MUESTRA TODAS LAS AULAS Y LISTAS AFECTADAS  FOR.EACH
+         var contenidoTabla=[];
+         var index=1;
+         if(arrayLista.length>0)
+         {
+          arrayLista.forEach(ilara=>{
+              contenidoTabla.push(["<tr><td>"+ilara+"</td></tr>"])    
+              })      
+         }
+         else
+         {
+          contenidoTabla.push(["<tr><td>"+"*** ALUMNO NO ESTÁ EN LISTAS ***"+"</td></tr>"]) 
+         } 
+        
+        var headTab=document.getElementById('headerTabLis');
+        var contab=document.getElementById('tablaResLis');
+
+        headTab.innerHTML="";
+        contab.innerHTML="";
+        
+        headTab.innerHTML=headerTabla;
+        contab.innerHTML=contenidoTabla;
+        
+        //fin del programa
+        var msg=document.getElementById('hproceso');
+        msg.innerHTML="";
+        alert("**************************\n     . \n Cambios realizados, \nrecargue la página (F5)")
+        
+    }
+
+
+    function mensajeFinal(wserror)
+    { 
+        if (wserror==1)
+        {
+        alert("   \n     ERROR EN EL PROCESO \n **** ALUMNO NO ACTUALIZADO *****")
+        }
+        else
+        {
+        alert("**************************\n     . \n Cambios realizados, \nrecargue la página (F5)")
+        }
+        document.getElementById("formManto").reset();
+    }
+   
+</script>

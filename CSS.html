@@ -1,0 +1,114 @@
+<style>
+    body{
+        font-family: "Sofia", sans-serif;
+    }
+
+    .encabeza h1{
+        position: center;
+        top: 18px;
+        left: 10px;
+        color: blue;
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        opacity: 0.8;
+        border-style: groove;
+        text-align: center;
+        margin: auto;
+        padding: 30px;
+    }
+
+    p{
+        font-family: Tahoma,"Lucida Console",Arial, Helvetica, sans-serif;
+        color: darkblue;
+        font-size: 15px;
+        margin: 10px 10px;
+    }
+
+    /*formato de parrila*/
+    .formulario{
+        display: grid;
+        grid-template-columns: auto auto auto;
+        background-color: lightblue;
+        row-gap: 20px;
+        column-gap: 5px;
+        padding: 30px;
+    }
+
+    .nombreAlumno{
+        grid-column: 1/1;
+      
+        text-align: left;
+    }
+
+    .statusNuevo{
+        grid-column: 2/2;
+     
+    }
+
+    .nombreAlumnoDL{
+        grid-column: 2/2;
+       grid-row: 2;
+    }
+
+    .solicitante{
+        grid-column: 1/1;
+        grid-row: 2;
+    }
+
+    .motivo{
+        grid-column: 2/2;
+    }
+
+
+    select
+{
+ background-color: antiquewhite;
+
+} 
+
+.form-select{
+ 
+  width:10em;
+  height:1.7em;
+}
+
+table{
+    
+/*background-color: azure;*/
+margin-top: 50px;
+margin-left: 50px;
+margin-right: 50px;
+margin-bottom: 10px;
+
+}
+
+td{
+    padding: 10px;
+    color: cadetblue;
+    font-size: smaller;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+th{
+    color: blue;
+    font-size: small;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+.boton{
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 5px 29px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px #163772 inset,0 0 0 2px rgba(255,255,255,0.15) 
+    inset, 0 4px 0 0 #333797, 0 4px 0 1px rgba(0,0,0,0.4),0 4px 0 1px rgba(0,0,0,0.5);
+}
+</style>
